@@ -21,22 +21,7 @@ let pokemonList = [
     }
 ];
 
-/* Version A - My inital attempt
-
-for (i = 0; i < pokemonList.length; i++) {
-    if (pokemonList[i].height > 1) {
-        document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') ' + '- Wow, that\'s big!')
-    } else { 
-        document.write(pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') ');
-    }
-} */
-
-// Version B 
-
-
-for (i = 0; i < pokemonList.length; i++) {
-    let pokemon = pokemonList[i];
-
+pokemonList.forEach(function(pokemon) {
     document.write(`${pokemon.name} (height: ${pokemon.height})`);
 
     if(pokemon.height > 1) {
@@ -44,4 +29,4 @@ for (i = 0; i < pokemonList.length; i++) {
     }
 
     document.write('<br>');
-} 
+}); 
