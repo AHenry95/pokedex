@@ -1,4 +1,6 @@
-let pokemonList = [ 
+let pokemonRepository = (function () {
+
+    let pokemonList = [ 
     {
         name: 'Bulbasaur', 
         height: 0.7,
@@ -19,9 +21,38 @@ let pokemonList = [
         height: 0.5, 
         type: ['water']
     }
-];
+    ];
 
-pokemonList.forEach(function(pokemon) {
+    function getAll() {
+        return pokemonList;
+    }
+
+    function add(pokemon) {
+        if(typeof pokemon !== 'object') {
+            return document.write('<p> add function is still broken </p>');
+        }
+        
+        if(!['name', 'height', 'type'].every(key => Object.keys(pokemon).includes(key))) {
+            return document.write('<p> add function is still broken </p>');
+        }
+
+        pokemonList.push(pokemon);
+    }    
+
+    function search(query){
+        return pokemonList.filter(pokemon => {
+            return pokemon.name.toLowerCase().includes(query.toLowerCase());
+        });
+    }
+
+    return {
+        getAll: getAll,
+        add: add,
+        search: search
+    }  
+})()
+
+pokemonRepository.getAll().forEach(pokemon => {
     document.write(`${pokemon.name} (height: ${pokemon.height})`);
 
     if(pokemon.height > 1) {
