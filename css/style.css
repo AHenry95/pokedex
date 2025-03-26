@@ -1,0 +1,17 @@
+.loading-message {
+    display: block;
+    height: 20px;
+    background: linear-gradient(to bottom, red 50%, white 50%);
+    border: 2px solid black;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    color: black; 
+    border-radius: 4px;
+}
+
+
+.hidden {
+    display: none
+}
