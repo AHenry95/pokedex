@@ -46,8 +46,8 @@ let pokemonRepository = (function () {
     };
     
     function showDetails(pokemon){
-        loadDetails(pokemon).then(function(){
-            console.log(pokemon.name);
+        loadDetails(pokemon).then(function () {
+           showModal(pokemon);
         });
     };
 
@@ -62,8 +62,8 @@ let pokemonRepository = (function () {
                     detailsUrl: item.url
                 };
                 add(pokemon);
-                hideLoadingMessage();
             });
+            hideLoadingMessage();
         }).catch(function (e) {
             console.error(e);
             hideLoadingMessage();
@@ -95,6 +95,63 @@ let pokemonRepository = (function () {
         let loading = document.querySelector('.loading-message');
         loading.classList.add('hidden'); 
     }
+
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
+        
+        modalContainer.innerHTML = '';
+        
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        let pokemonImage = document.createElement('img')
+        pokemonImage.src = pokemon.imageUrl;
+
+        let titleElement = document.createElement('h1');
+        titleElement.classList.add('pokemodal-title')
+        titleElement.innerText = pokemon.name;
+
+        let contentHeight = document.createElement('p');
+        let pokeHeight = Math.round(pokemon.height)/10;
+        contentHeight.innerText = 'Height: ' + pokeHeight + 'm'; 
+        
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(pokemonImage);
+        modal.appendChild(contentHeight);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if(target === modalContainer) {
+                hideModal();
+            };
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+                hideModal();
+            };
+        });
+    };
+
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    };
+/*
+- create close functionality 
+- create functionality that creates the modal 
+- remove modal HTML
+- 
+*/    
 
     return {
         getAll: getAll,
