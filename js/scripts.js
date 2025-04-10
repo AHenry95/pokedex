@@ -146,12 +146,6 @@ let pokemonRepository = (function () {
         let modalContainer = document.querySelector('#modal-container');
         modalContainer.classList.remove('is-visible');
     };
-/*
-- create close functionality 
-- create functionality that creates the modal 
-- remove modal HTML
-- 
-*/    
 
     return {
         getAll: getAll,
