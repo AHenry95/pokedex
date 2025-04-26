@@ -36,13 +36,13 @@ let pokemonRepository = (function () {
         button.setAttribute('type', 'button');
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#pokeModal');
-        addEventListener(button, pokemon);
+        pokemonButtonListener(button, pokemon);
 
         listItem.appendChild(button);
         pokemonList.appendChild(listItem);
     };
 
-    function addEventListener(button, pokemon){
+    function pokemonButtonListener(button, pokemon){
        button.addEventListener('click', function() {
             showDetails(pokemon); 
        });
@@ -126,7 +126,7 @@ let pokemonRepository = (function () {
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails
-    }  
+    };  
 })();
 
 pokemonRepository.loadList().then(function() {
